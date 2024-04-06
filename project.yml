@@ -69,6 +69,7 @@
     - gcovr
   :reports:
     - HtmlDetailed
+    - Xml
   :gcovr:
     :report_exclude:
 
