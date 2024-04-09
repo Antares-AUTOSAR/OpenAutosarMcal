@@ -1,4 +1,4 @@
-name: Test
+tname: Test
 on:
   workflow_dispatch:
 
