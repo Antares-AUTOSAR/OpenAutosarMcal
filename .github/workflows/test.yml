@@ -12,4 +12,4 @@ jobs:
         uses: batov/ceedling_action@master
       - name: Print Working Directory
         run: |
-             ls -a Build/ceedling/artifacts/gcov
+             tree -L 1
