@@ -460,3 +460,25 @@ void test__Mcu_GetRamState__run_after_Mcu_init( void )
 
     TEST_ASSERT_EQUAL_MESSAGE( ReturnValue, MCU_RAMSTATE_VALID, "Expected MCU_RAMSTATE_VALID (1)" );
 }
+
+/**
+ * @brief   **Test GetRamState with module Initialized**
+ *
+ * The test runs GetRamState function after the Mcu module is initialized, just to check
+ * the branch which executes the Arch function. The arch function is ignored with a mock,
+ * returning the MCU_RAMSTATE_VALID value (1) which is used to validate that the function runs
+ * as expected
+ */
+void test__Mcu_GetRamState__run_after_Mcu_init2( void )
+{
+    Mcu_ConfigType McuConfig_test = { 0 };
+    Mcu_RamStateType ReturnValue  = MCU_RAMSTATE_INVALID;
+
+    Mcu_Arch_Init_Ignore( );
+    Mcu_Init( &McuConfig_test );
+
+    Mcu_Arch_GetRamState_IgnoreAndReturn( MCU_RAMSTATE_VALID );
+    ReturnValue = Mcu_GetRamState( );
+
+    TEST_ASSERT_EQUAL_MESSAGE( ReturnValue, MCU_RAMSTATE_VALID, "Expected MCU_RAMSTATE_VALID (1)" );
+}
