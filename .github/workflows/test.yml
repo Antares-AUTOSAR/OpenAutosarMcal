@@ -11,7 +11,7 @@ jobs:
       - name: Run tests
         uses: batov/ceedling_action@master
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
             files: Build/ceedling/artifacts/test/report.xml
