@@ -12,4 +12,4 @@ jobs:
         uses: batov/ceedling_action@master
       - name: Print Working Directory
         run: |
-             tree -L 1
+             tree -L 5
