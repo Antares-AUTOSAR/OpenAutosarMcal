@@ -51,6 +51,7 @@
 # enable and configure code coverage 
 :gcov:
   :abort_on_uncovered: true
+  :xml_report: true
   :uncovered_ignore_list:
     - main.c #
     - startup.c #
@@ -69,8 +70,10 @@
     - gcovr
   :reports:
     - HtmlDetailed
-    - Xml
+    - XmlSummary
   :gcovr:
+    :xml_pretty: true
+    :cobertura_pretty: true
     :report_exclude:
 
 
