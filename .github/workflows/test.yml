@@ -1,4 +1,4 @@
-name: Test
+tname: Test
 on:
   workflow_dispatch:
 
@@ -14,4 +14,4 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-            files: Build/ceedling/artifacts/gcov/GcovCoverageCobertura.xml
+            files: Build/ceedling/artifacts/gcov/report.xml
