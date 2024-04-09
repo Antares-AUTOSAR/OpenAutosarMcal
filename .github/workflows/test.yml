@@ -12,7 +12,7 @@ jobs:
         uses: batov/ceedling_action@master
       - name: Print Working Directory
         run: |
-             ls -a Build/ceedling
+             ls -a Build/ceedling/artifacts
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
