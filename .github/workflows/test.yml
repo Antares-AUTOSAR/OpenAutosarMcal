@@ -10,6 +10,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Run tests
         uses: batov/ceedling_action@master
-      - name: Print Working Directory
-        run: |
-             tree -L 5
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+            files: Build/ceedling/artifacts/test/report.xml
