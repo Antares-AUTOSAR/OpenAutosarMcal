@@ -46,11 +46,13 @@
     - stdout_pretty_tests_report
     - module_generator
     - gcov
+    - junit_tests_report
 
 
 # enable and configure code coverage 
 :gcov:
   :abort_on_uncovered: true
+  :xml_report: true
   :uncovered_ignore_list:
     - main.c #
     - startup.c #
@@ -69,7 +71,10 @@
     - gcovr
   :reports:
     - HtmlDetailed
+    - XmlSummary
   :gcovr:
+    :xml_pretty: true
+    :cobertura_pretty: true
     :report_exclude:
 
 
