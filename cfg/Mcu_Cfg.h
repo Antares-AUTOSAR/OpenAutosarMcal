@@ -43,7 +43,7 @@
  * @brief Enable / disable the service Mcu_DistributePllClock() from the code.
  * @typedef EcucBooleanParamDef
  */
-#define MCU_NO_PLL            STD_ON
+#define MCU_NO_PLL            STD_OFF
 
 /**
  * @brief Enable / disable the service Mcu_PerformReset() from the code.

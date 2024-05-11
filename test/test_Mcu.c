@@ -94,8 +94,8 @@ void test__Mcu_InitRamSection__run_after_Mcu_init( void )
  */
 void test__Mcu_InitClock__run_before_Mcu_init( void )
 {
-    Mcu_ClockType ClockSetting_test = 0;
-    Std_ReturnType ReturnValue      = E_NOT_OK;
+    Mcu_ClkConfigType ClockSetting_test = { 0 };
+    Std_ReturnType ReturnValue          = E_NOT_OK;
 
     Det_ReportError_IgnoreAndReturn( E_OK );
     ReturnValue = Mcu_InitClock( ClockSetting_test );
@@ -112,9 +112,9 @@ void test__Mcu_InitClock__run_before_Mcu_init( void )
  */
 void test__Mcu_InitClock__run_after_Mcu_init( void )
 {
-    Mcu_ConfigType McuConfig_test   = { 0 };
-    Mcu_ClockType ClockSetting_test = 0;
-    Std_ReturnType ReturnValue      = E_NOT_OK;
+    Mcu_ConfigType McuConfig_test       = { 0 };
+    Mcu_ClkConfigType ClockSetting_test = { 0 };
+    Std_ReturnType ReturnValue          = E_NOT_OK;
 
     Mcu_Arch_Init_Ignore( );
     Mcu_Init( &McuConfig_test );
@@ -223,7 +223,7 @@ void test__Mcu_GetPllStatus__run_before_Mcu_init( void )
     Det_ReportError_IgnoreAndReturn( E_OK );
     ReturnValue = Mcu_GetPllStatus( );
 
-    TEST_ASSERT_EQUAL_MESSAGE( ReturnValue, MCU_PLL_UNLOCKED, "Expected MCU_PLL_UNLOCKED (1) due to UNINIT error" );
+    TEST_ASSERT_EQUAL_MESSAGE( ReturnValue, MCU_PLL_STATUS_UNDEFINED, "Expected MCU_PLL_STATUS_UNDEFINED (2) due to UNINIT error" );
 }
 
 /**

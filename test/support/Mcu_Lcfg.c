@@ -17,6 +17,36 @@
 /* clang-format off */
 const Mcu_ConfigType McuConfig =
 {
-    .PllStatus = MCU_PLL_STATUS_UNDEFINED
+    .PllStatus = MCU_PLL_STATUS_UNDEFINED,
+    .ClockConfig =
+    {
+        .ClkConfig =
+        {
+            .SysClockSource = MCU_SYSCLKSOURCE_HSI,
+            .AHBClockDivider = MCU_AHB_DIV1,
+            .APB1ClockDivider = MCU_APB1_DIV1
+        },
+        .OscConfig =
+        {
+            .HSEState = MCU_HSE_OFF,
+            .HSI48State = MCU_HSI48_OFF,
+            .HSICalibrationValue = MCU_HSICALIBRATION_DEFAULT,
+            .HSIDivider = MCU_HSI_DIV1,
+            .HSIState = MCU_HSI_ON,
+            .LSEState = MCU_LSE_OFF,
+            .LSIState = MCU_LSI_OFF,
+            .OscillatorType = MCU_OSCILLATORTYPE_HSI,
+            .PLL = 
+            {
+                .PllState = MCU_PLL_STATE_ENABLED,
+                .PllSource = MCU_PLL_SOURCE_HSI,
+                .PllM = MCU_PLLM_DIV1,
+                .PLLN = 8u,
+                .PllP = MCU_PLLP_DIV2,
+                .PllQ = MCU_PLLQ_DIV2,
+                .PllR = MCU_PLLR_DIV2
+            }
+        }
+    }
 };
 /* clang-format on */
