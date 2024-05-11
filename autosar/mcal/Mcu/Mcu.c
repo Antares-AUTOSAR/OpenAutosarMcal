@@ -47,7 +47,7 @@ MCU_STATIC Mcu_HwUnit HwUnit_Mcu =
  *
  * @reqs    SWS_Mcu_00153
  */
-void Mcu_Init( const Mcu_ConfigType *ConfigPtr )
+void Mcu_Init( Mcu_ConfigType *ConfigPtr )
 {
     Mcu_Arch_Init( &HwUnit_Mcu, ConfigPtr );
 
@@ -99,7 +99,7 @@ Std_ReturnType Mcu_InitRamSection( Mcu_RamSectionType RamSection )
  *
  * @reqs    SWS_Mcu_00155, SWS_Mcu_00017, SWS_Mcu_00125
  */
-Std_ReturnType Mcu_InitClock( Mcu_ClockType ClockSetting )
+Std_ReturnType Mcu_InitClock( Mcu_ClkConfigType ClockSetting )
 {
     Std_ReturnType ReturnValue = E_NOT_OK;
 
@@ -112,14 +112,14 @@ Std_ReturnType Mcu_InitClock( Mcu_ClockType ClockSetting )
     }
     else
     {
-        ReturnValue = Mcu_Arch_InitClock( &HwUnit_Mcu, ClockSetting );
+        ReturnValue = Mcu_Arch_InitClock( &HwUnit_Mcu, &ClockSetting );
     }
 
     return ReturnValue;
 }
 #endif
 
-#if MCU_NO_PLL == STD_ON /* cppcheck-suppress misra-c2012-20.9 ; it is necesary to use a define for this function */
+#if MCU_NO_PLL == STD_OFF /* cppcheck-suppress misra-c2012-20.9 ; it is necesary to use a define for this function */
 /**
  * @brief    **PLL to MCU Clock distribution**
  *
@@ -171,17 +171,21 @@ Mcu_PllStatusType Mcu_GetPllStatus( void )
 {
     Mcu_PllStatusType ReturnValue = MCU_PLL_UNLOCKED;
 
-    if( HwUnit_Mcu.HwUnitState == MCU_STATE_UNINIT )
-    {
-        /* If the development error detection is enabled for the MCU module:
-        If any function except Mcu_GetVersionInfo of the MCU module is called before
-        Mcu_Init function, the error code MCU_E_UNINIT shall be reported to the DET. */
-        Det_ReportError( MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_ID_GET_PLL_STATUS, MCU_E_UNINIT );
-    }
-    else
-    {
-        ReturnValue = Mcu_Arch_GetPllStatus( &HwUnit_Mcu );
-    }
+    /* clang-format off */
+    /* cppcheck-suppress misra-c2012-20.9 ; if PLL is not supported must return specified value */
+    #if MCU_NO_PLL == STD_ON
+        ReturnValue = MCU_PLL_STATUS_UNDEFINED;
+    #else
+        if( HwUnit_Mcu.HwUnitState == MCU_STATE_UNINIT )
+        {
+            ReturnValue = MCU_PLL_STATUS_UNDEFINED;
+        }
+        else
+        {
+            ReturnValue = Mcu_Arch_GetPllStatus( &HwUnit_Mcu );
+        }
+    #endif
+    /* clang-format on */
 
     return ReturnValue;
 }

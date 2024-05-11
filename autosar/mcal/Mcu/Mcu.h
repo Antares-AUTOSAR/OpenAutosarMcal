@@ -14,12 +14,12 @@
 #include "Mcu_Cfg.h"
 
 
-void Mcu_Init( const Mcu_ConfigType *ConfigPtr );
+void Mcu_Init( Mcu_ConfigType *ConfigPtr );
 Std_ReturnType Mcu_InitRamSection( Mcu_RamSectionType RamSection );
 #if MCU_INIT_CLOCK == STD_ON /* cppcheck-suppress misra-c2012-20.9 ; it is necesary to use a define for this function */
-Std_ReturnType Mcu_InitClock( Mcu_ClockType ClockSetting );
+Std_ReturnType Mcu_InitClock( Mcu_ClkConfigType ClockSetting );
 #endif
-#if MCU_NO_PLL == STD_ON /* cppcheck-suppress misra-c2012-20.9 ; it is necesary to use a define for this function */
+#if MCU_NO_PLL == STD_OFF /* cppcheck-suppress misra-c2012-20.9 ; it is necesary to use a define for this function */
 Std_ReturnType Mcu_DistributePllClock( void );
 #endif
 Mcu_PllStatusType Mcu_GetPllStatus( void );
