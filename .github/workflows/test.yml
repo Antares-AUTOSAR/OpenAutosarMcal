@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Run tests
-        uses: batov/ceedling_action@master
+        uses: ailr16/ceedling_action@master
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
