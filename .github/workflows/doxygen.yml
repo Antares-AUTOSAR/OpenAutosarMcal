@@ -27,7 +27,7 @@ jobs:
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          path: Build/doxygen/html
+          path: docs/doxygen/html
 
 
   deploy:
