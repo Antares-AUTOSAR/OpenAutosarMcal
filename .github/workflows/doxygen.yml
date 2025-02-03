@@ -1,0 +1,49 @@
+name: Doxygen-GH Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Get Doxygen
+        run: |
+          cd ..
+          wget -q https://github.com/doxygen/doxygen/releases/download/Release_1_13_0/doxygen-1.13.0.linux.bin.tar.gz
+          gunzip doxygen-1.13.0.linux.bin.tar.gz
+          tar -xf doxygen-1.13.0.linux.bin.tar
+          rm doxygen-1.13.0.linux.bin.tar
+      - name: Run Doxygen
+        run: ../doxygen-1.13.0/bin/doxygen Doxyfile
+      - name: Upload artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: Build/doxygen/html
+
+          
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.output.page_url }}
+    
+    runs-on: ubuntu-24.04
+    
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
